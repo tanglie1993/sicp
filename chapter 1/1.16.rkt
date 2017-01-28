@@ -1,0 +1,10 @@
+#lang racket
+(define (power currProd currIndex targetIndex base)
+  (cond ((= 0 targetIndex) 1)
+        ((= 1 targetIndex) base)
+        ((= currIndex targetIndex) currProd)
+        ((> currIndex (/ targetIndex 2)) (* currProd (power base 1 (- targetIndex currIndex) base)))
+        (else (* currProd currProd (power base 1 (- targetIndex currIndex currIndex) base)))
+        )
+  )
+(define (fastPower base index) (power base 1 index base))
