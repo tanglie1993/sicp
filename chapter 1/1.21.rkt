@@ -1,0 +1,12 @@
+#lang racket
+(define (smallest-divisor n)
+  (find-divisor n 2))
+(define (find-divisor n test)
+  (cond((> (* test test) n) n)
+      ((= (remainder n test) 0) test)
+      (else (find-divisor n (+ 1 test)))
+  )
+)
+(smallest-divisor 199)
+(smallest-divisor 1999)
+(smallest-divisor 19999)
