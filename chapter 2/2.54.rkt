@@ -1,0 +1,15 @@
+#lang racket
+(require "commons.rkt")
+(define (equal? a b)
+  (if (eq? a b)
+      true
+      (and (eq? (car a) (car b))
+           (equal? (cdr a) (cdr b))
+           )
+      )
+  )
+(define a '(this is a list))
+(define b '(this is a list))
+(eq? (car a) (car b))
+(eq? (cdr a) (cdr b))
+(equal? '(this is a list) '(this is a list))

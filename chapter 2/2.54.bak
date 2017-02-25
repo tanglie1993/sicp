@@ -1,0 +1,10 @@
+#lang racket
+(require "commons.rkt")
+(define (equal? a b)
+  if (eq? a b)
+      true
+  (and (eq? (car a) (car b))
+       (eq? (cdr a) (cdr b))
+       )
+  )
+(equal? 'aaa 'aaa)
