@@ -3,7 +3,7 @@
 (provide filter)
 (provide accumulate)
 (provide enumerate-interval)
-
+(provide deriv)
 
 (define (flatmap proc seq)
   (accumulate append null (map proc seq)))
@@ -48,9 +48,40 @@
 (define (product? x)
   (and (pair? x) (eq? (car x) '*)))
 (define (multiplier p) (cadr p))
-(define (multiplicand p) (caddr p))
+(define (multiplicand p)
+  (if (= (length p) 3)
+      (caddr p)
+  (append (list (car p)) (cdr (cdr p)))
+  )
+  )
 (define (exponentiation? x)
   (and (pair? x) (eq? (car x) '**)))
+
+(define (deriv exp var)
+  (cond ((number? exp) 0)
+        ((variable? exp)
+         (if (same-variable? exp var) 1 0))
+        ((sum? exp)
+         (make-sum (deriv (addend exp) var)
+                   (deriv (augend exp) var)))
+        ((product? exp)
+         (make-sum
+          (make-product (multiplier exp)
+                        (deriv (multiplicand exp) var))
+          (make-product (deriv (multiplier exp) var)
+                        (multiplicand exp))))
+        ((exponentiation? exp)
+         (make-product
+          (list '* (caddr exp) (list '** (cadr exp) (- (caddr exp) 1)))
+          (deriv (cadr exp) var)
+          
+          )
+         )
+        (else
+         (error "unknown expression type -- DERIV" exp))))
+
+
+
 
 
 
