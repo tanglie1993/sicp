@@ -1,0 +1,10 @@
+(define (count-pairs x)
+  (if (not (pair? x))
+  0
+  (+ (count-pairs (car x))
+     (count-pairs (cdr x))
+     1)))
+(define a (cons 1 2))
+(count-pairs (cons (cons 1 2) (cons 3 4)))
+(count-pairs (cons 1 (cons a a)))
+(count-pairs (cons (cons a a) (cons a a)))
