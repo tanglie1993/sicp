@@ -9,10 +9,10 @@
     (if subtable
         (if (not (list? subtable))
             subtable
-            (let ((record (same-key? (cadr keys) (cdr subtable))))
-              (if record
-                  (cdr record)
-                  #f))
+            (if (null? (cdr keys))
+                #f
+                (lookup (cdr keys) subtable)
+                )
             )
         #f)))
 (define (insert! keys value table)
