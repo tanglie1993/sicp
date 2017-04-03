@@ -9,7 +9,7 @@
                         front-ptr)
                     (begin
                         (set-cdr! rear-ptr (list item))
-                        (set! rear-ptr (list item))
+                        (set! rear-ptr (cdr rear-ptr))
                         front-ptr)))
         (define (delete-queue!)
             (set! front-ptr (cdr front-ptr))
@@ -24,4 +24,6 @@
 (define q (make-queue))
 ((q 'insert-queue!) 'a)
 ((q 'insert-queue!) 'b)
+((q 'insert-queue!) 'c)
+((q 'insert-queue!) 'd)
 (q 'delete-queue!)
