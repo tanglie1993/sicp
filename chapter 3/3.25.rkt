@@ -21,8 +21,7 @@
     (if subtable
         (if (not (list? subtable))
             (set-cdr! record value)
-            (insert! (cdr keys) value subtable)
-            'ok)
+            (insert! (cdr keys) value subtable))
         (set-cdr! table
                   (cons (list (car keys)
                               (insert! (cadr keys) value (make-table)))
