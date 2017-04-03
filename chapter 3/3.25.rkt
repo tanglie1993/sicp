@@ -7,10 +7,13 @@
 (define (lookup keys table)
   (let ((subtable (same-key? (car keys) (cdr table))))
     (if subtable
-        (let ((record (same-key? (cadr keys) (cdr subtable))))
-          (if record
-              (cdr record)
-              #f))
+        (if (not (list? subtable))
+            subtable
+            (let ((record (same-key? (cadr keys) (cdr subtable))))
+              (if record
+                  (cdr record)
+                  #f))
+            )
         #f)))
 (define (insert! keys value table)
   (let ((subtable (same-key? (car keys) (cdr table))))
