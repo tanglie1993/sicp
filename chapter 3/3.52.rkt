@@ -1,6 +1,4 @@
-#lang racket
-(require racket/stream)
-
+(require "stream-commons.rkt")
 
 (define (show x)
   (begin (display x)
