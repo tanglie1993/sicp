@@ -9,6 +9,7 @@
 (provide display-line)
 (provide display-stream)
 (provide stream-enumerate-interval)
+(provide add-streams)
 (define (show x)
   (begin (display x)
          (newline))
@@ -43,4 +44,5 @@
       (stream-cons
        low
        (stream-enumerate-interval (+ low 1) high))))
-
+(define (add-streams s1 s2)
+(stream-map + s1 s2))
